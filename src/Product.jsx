@@ -2,13 +2,21 @@ import { useState } from "react";
 import "./Product.css";
 import { data } from "./data";
 import { BiImage } from "react-icons/bi";
+import { BiImageAdd } from "react-icons/bi";
 import { closestCenter, DndContext } from "@dnd-kit/core";
 import { arrayMove, SortableContext, verticalListSortingStrategy } from "@dnd-kit/sortable";
 import SortableProduct from "./Component/SortableProduct";
-
+import "react-responsive-modal/styles.css";
+import { Modal } from "react-responsive-modal";
 const Product = () => {
+  const [open, setOpen] = useState(false);
+
   const [selectedItems, setSelectedItems] = useState([]);
   const [products, setProducts] = useState(data);
+  const [newImageSrc, setNewImageSrc] = useState("");
+
+  const onOpenModal = () => setOpen(true);
+  const onCloseModal = () => setOpen(false);
 
   // drag and drop image function
   const onDragEnd = (event) => {
@@ -40,6 +48,21 @@ const Product = () => {
     setProducts(updatedItems);
     setSelectedItems([]);
   }
+
+  // add new image function
+  const addNewImage = () => {
+    console.log(newImageSrc);
+    if (newImageSrc) {
+      const newImage = {
+        id: Date.now().toString(), //  ID generation
+        src: newImageSrc,
+      };
+
+      setProducts((prevProducts) => [...prevProducts, newImage]);
+      setNewImageSrc(""); // Clear the new image source after adding it
+      onCloseModal();
+    }
+  };
 
   return (
     <main className="bg-[#f1f3f4] p-[10px] md:p-[20px] lg:p-[50px]">
@@ -102,7 +125,10 @@ const Product = () => {
                   </div>
                 ))}
 
-                <div className="rounded border-[2px] border-dashed border-[#f1f3f4] p-[10px] md:p-[20px] flex justify-center items-center cursor-pointer">
+                <div
+                  onClick={onOpenModal}
+                  className="rounded border-[2px] border-dashed border-[#f1f3f4] p-[10px] md:p-[20px] flex justify-center items-center cursor-pointer"
+                >
                   <div className="">
                     <BiImage className="mx-auto"></BiImage>
                     <p>Add image</p>
@@ -113,6 +139,29 @@ const Product = () => {
           </DndContext>
         </div>
       </section>
+
+      <div>
+        <Modal open={open} onClose={onCloseModal} center>
+          <div className="py-[40px] bg-[orange] rounded-[55px]">
+            <h2 className="my-[20px] text-center font-bold">Add new image</h2>
+            <div className="flex flex-col px-[10px]">
+              <input
+                className="p-[5px]  border-0 my-[8px]"
+                type="text"
+                placeholder="Past Image URL "
+                value={newImageSrc}
+                onChange={(e) => setNewImageSrc(e.target.value)}
+              />
+              <button
+                className="bg-amber-600 text-black p-[5px] font-semibold"
+                onClick={addNewImage}
+              >
+                Attach <BiImageAdd className="inline"></BiImageAdd>
+              </button>
+            </div>
+          </div>
+        </Modal>
+      </div>
     </main>
   );
 };
