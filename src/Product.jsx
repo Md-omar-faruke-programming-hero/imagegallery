@@ -11,7 +11,7 @@ import {
 } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 
-const SortableProduct = ({ product, selectedItems, toggleImageSelection }) => {
+const SortableProduct = ({ product }) => {
   const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
     id: product.id,
   });
@@ -29,7 +29,7 @@ const SortableProduct = ({ product, selectedItems, toggleImageSelection }) => {
       {...listeners}
       className={` rounded-[5px] md:rounded-[8px] overflow-hidden border-[2px] border-solid border-[#f1f3f4] hover:overlay-bg cursor-move `}
     >
-      <img className="" src={product.src} alt="" />
+      <img className="" src={product.src} alt="product image" />
     </div>
   );
 };
@@ -38,16 +38,15 @@ const Product = () => {
   const [selectedItems, setSelectedItems] = useState([]);
   const [products, setProducts] = useState(data);
 
+  // drag and drop image function
   const onDragEnd = (event) => {
     const { active, over } = event;
-
     if (active.id === over.id) {
       return;
     }
     setProducts((products) => {
       const oldIndex = products.findIndex((product) => product.id === active.id);
       const newIndex = products.findIndex((product) => product.id === over.id);
-
       return arrayMove(products, oldIndex, newIndex);
     });
   };
@@ -71,8 +70,8 @@ const Product = () => {
   }
 
   return (
-    <div className="bg-[#f1f3f4] p-[10px] md:p-[20px] lg:p-[50px]">
-      <div className="products w-full md:w-[70%] mx-auto rounded-[10px] md:rounded-[20px] lg:rounded-[30px] bg-[white]">
+    <main className="bg-[#f1f3f4] p-[10px] md:p-[20px] lg:p-[50px]">
+      <section className="products w-full md:w-[70%] mx-auto rounded-[10px] md:rounded-[20px] lg:rounded-[30px] bg-[white]">
         {selectedItems.length > 0 ? (
           <div className="flex flex-col md:flex-row justify-between px-[10px] md:px-[20px] py-[10px] md:py-[20px] border-b-[2px] md:border-b-[3px] border-solid border-[#f1f3f4]">
             <div className="mb-[10px] md:mb-0">
@@ -104,12 +103,7 @@ const Product = () => {
                     key={i}
                     className={`imgContainer  ${i === 0 ? "md:col-span-2 md:row-span-2" : ""}`}
                   >
-                    <SortableProduct
-                      i={i}
-                      product={product}
-                      selectedItems={selectedItems}
-                      toggleImageSelection={toggleImageSelection}
-                    />
+                    <SortableProduct product={product} />
                     <>
                       {selectedItems.includes(product.id) ? (
                         <div className="checkbox2">
@@ -146,8 +140,8 @@ const Product = () => {
             </SortableContext>
           </DndContext>
         </div>
-      </div>
-    </div>
+      </section>
+    </main>
   );
 };
 export default Product;
