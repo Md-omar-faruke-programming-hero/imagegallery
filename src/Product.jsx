@@ -3,36 +3,8 @@ import "./Product.css";
 import { data } from "./data";
 import { BiImage } from "react-icons/bi";
 import { closestCenter, DndContext } from "@dnd-kit/core";
-import {
-  arrayMove,
-  SortableContext,
-  useSortable,
-  verticalListSortingStrategy,
-} from "@dnd-kit/sortable";
-import { CSS } from "@dnd-kit/utilities";
-
-const SortableProduct = ({ product }) => {
-  const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
-    id: product.id,
-  });
-
-  const style = {
-    transition,
-    transform: CSS.Transform.toString(transform),
-  };
-
-  return (
-    <div
-      ref={setNodeRef}
-      style={style}
-      {...attributes}
-      {...listeners}
-      className={` rounded-[5px] md:rounded-[8px] overflow-hidden border-[2px] border-solid border-[#f1f3f4] hover:overlay-bg cursor-move `}
-    >
-      <img className="" src={product.src} alt="product image" />
-    </div>
-  );
-};
+import { arrayMove, SortableContext, verticalListSortingStrategy } from "@dnd-kit/sortable";
+import SortableProduct from "./Component/SortableProduct";
 
 const Product = () => {
   const [selectedItems, setSelectedItems] = useState([]);
