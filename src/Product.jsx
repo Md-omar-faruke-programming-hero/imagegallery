@@ -65,7 +65,9 @@ const Product = () => {
 
   return (
     <main className="bg-[#f1f3f4] p-[10px] md:p-[20px] lg:p-[50px]">
-      <section className="products w-full md:w-[70%] mx-auto rounded-[10px] md:rounded-[20px] lg:rounded-[30px] bg-[white]">
+      <section
+        className={`products w-full md:w-[70%] ${products?.length <= 0 ? "h-screen":"h-auto"} mx-auto rounded-[10px] md:rounded-[20px] lg:rounded-[30px] bg-[white]`}
+      >
         {selectedItems?.length > 0 ? (
           <div className="flex flex-col md:flex-row justify-between px-[10px] md:px-[20px] py-[10px] md:py-[20px] border-b-[2px] md:border-b-[3px] border-solid border-[#f1f3f4]">
             <div className="mb-[10px] md:mb-0">
@@ -99,6 +101,7 @@ const Product = () => {
                       key={i}
                       className={`imgContainer  ${i === 0 ? "md:col-span-2 md:row-span-2" : ""}`}
                     >
+                      {console.log(i, "index")}
                       <SortableProduct product={product} />
                       <>
                         {selectedItems.includes(product?.id) ? (
