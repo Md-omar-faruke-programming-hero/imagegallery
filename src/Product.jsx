@@ -52,18 +52,24 @@ const Product = () => {
   }
 
   // add new image function
-
+  var expression = /^data:image\/(jpeg|jpg|gif|png|bmp|webp|svg\+xml|tiff|ico);base64,/;
+  var regex = new RegExp(expression);
   const addNewImage = () => {
     if (newImageSrc) {
-      const newImage = {
-        id: Date.now().toString(), //  ID generation
-        src: newImageSrc,
-      };
+      if (newImageSrc.match(regex)) {
+        console.log(34);
+        const newImage = {
+          id: Date.now().toString(), //  ID generation
+          src: newImageSrc,
+        };
 
-      setProducts((prevProducts) => [...prevProducts, newImage]);
-      toast.success("Image added successfully!");
-      setNewImageSrc(""); // Clear the new image source after adding it
-      onCloseModal();
+        setProducts((prevProducts) => [...prevProducts, newImage]);
+        toast.success("Image added successfully!");
+        setNewImageSrc(""); // Clear the new image source after adding it
+        onCloseModal();
+      } else {
+        toast.warning("invalid url");
+      }
     } else {
       toast.warning("Past your image url");
     }
