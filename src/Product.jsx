@@ -47,7 +47,7 @@ const Product = () => {
   function deleteSelectedImages() {
     const updatedItems = products.filter((item) => !selectedItems.includes(item.id));
     setProducts(updatedItems);
-    toast.warning("Delete your item successfully!");
+    toast.error("Delete your item successfully!");
     setSelectedItems([]);
   }
 
@@ -166,7 +166,7 @@ const Product = () => {
                 onChange={(e) => setNewImageSrc(e.target.value)}
               />
               <button
-                className="bg-amber-600 text-black p-[5px] font-semibold"
+                className="bg-amber-600 text-black p-[5px]  font-semibold"
                 onClick={addNewImage}
               >
                 Attach <BiImageAdd className="inline"></BiImageAdd>
