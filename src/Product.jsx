@@ -8,6 +8,8 @@ import { arrayMove, SortableContext, verticalListSortingStrategy } from "@dnd-ki
 import SortableProduct from "./Component/SortableProduct";
 import "react-responsive-modal/styles.css";
 import { Modal } from "react-responsive-modal";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const Product = () => {
   const [open, setOpen] = useState(false);
   const [selectedItems, setSelectedItems] = useState([]);
@@ -45,12 +47,13 @@ const Product = () => {
   function deleteSelectedImages() {
     const updatedItems = products.filter((item) => !selectedItems.includes(item.id));
     setProducts(updatedItems);
+    toast.warning("Delete your item successfully!");
     setSelectedItems([]);
   }
 
   // add new image function
+
   const addNewImage = () => {
-    console.log(newImageSrc);
     if (newImageSrc) {
       const newImage = {
         id: Date.now().toString(), //  ID generation
@@ -58,15 +61,21 @@ const Product = () => {
       };
 
       setProducts((prevProducts) => [...prevProducts, newImage]);
+      toast.success("Image added successfully!");
       setNewImageSrc(""); // Clear the new image source after adding it
       onCloseModal();
+    } else {
+      toast.warning("Past your image url");
     }
   };
 
   return (
     <main className="bg-[#f1f3f4] p-[10px] md:p-[20px] lg:p-[50px]">
+      <ToastContainer />
       <section
-        className={`products w-full md:w-[70%] ${products?.length <= 1 ? "h-screen":"h-auto min-h-screen"} mx-auto rounded-[10px] md:rounded-[20px] lg:rounded-[30px] bg-[white]`}
+        className={`products w-full md:w-[70%] ${
+          products?.length <= 1 ? "h-screen" : "h-auto min-h-screen"
+        } mx-auto rounded-[10px] md:rounded-[20px] lg:rounded-[30px] bg-[white]`}
       >
         {selectedItems?.length > 0 ? (
           <div className="flex flex-col md:flex-row justify-between px-[10px] md:px-[20px] py-[10px] md:py-[20px] border-b-[2px] md:border-b-[3px] border-solid border-[#f1f3f4]">
