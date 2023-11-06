@@ -10,7 +10,6 @@ import "react-responsive-modal/styles.css";
 import { Modal } from "react-responsive-modal";
 const Product = () => {
   const [open, setOpen] = useState(false);
-
   const [selectedItems, setSelectedItems] = useState([]);
   const [products, setProducts] = useState(data);
   const [newImageSrc, setNewImageSrc] = useState("");
@@ -67,7 +66,7 @@ const Product = () => {
   return (
     <main className="bg-[#f1f3f4] p-[10px] md:p-[20px] lg:p-[50px]">
       <section className="products w-full md:w-[70%] mx-auto rounded-[10px] md:rounded-[20px] lg:rounded-[30px] bg-[white]">
-        {selectedItems.length > 0 ? (
+        {selectedItems?.length > 0 ? (
           <div className="flex flex-col md:flex-row justify-between px-[10px] md:px-[20px] py-[10px] md:py-[20px] border-b-[2px] md:border-b-[3px] border-solid border-[#f1f3f4]">
             <div className="mb-[10px] md:mb-0">
               <div className="flex items-center cursor-pointer">
@@ -93,37 +92,39 @@ const Product = () => {
           <DndContext collisionDetection={closestCenter} onDragEnd={onDragEnd}>
             <SortableContext items={products} strategy={verticalListSortingStrategy}>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-[10px]">
-                {products.map((product, i) => (
-                  <div
-                    key={i}
-                    className={`imgContainer  ${i === 0 ? "md:col-span-2 md:row-span-2" : ""}`}
-                  >
-                    <SortableProduct product={product} />
-                    <>
-                      {selectedItems.includes(product.id) ? (
-                        <div className="checkbox2">
-                          <input
-                            onChange={() => toggleImageSelection(product.id)}
-                            checked={selectedItems.includes(product.id)}
-                            type="checkbox"
-                            name=""
-                            id=""
-                          />
-                        </div>
-                      ) : (
-                        <div className="checkbox">
-                          <input
-                            onChange={() => toggleImageSelection(product.id)}
-                            checked={selectedItems.includes(product.id)}
-                            type="checkbox"
-                            name=""
-                            id=""
-                          />
-                        </div>
-                      )}
-                    </>
-                  </div>
-                ))}
+                {Array.isArray(products) &&
+                  products?.length > 0 &&
+                  products?.map((product, i) => (
+                    <div
+                      key={i}
+                      className={`imgContainer  ${i === 0 ? "md:col-span-2 md:row-span-2" : ""}`}
+                    >
+                      <SortableProduct product={product} />
+                      <>
+                        {selectedItems.includes(product?.id) ? (
+                          <div className="checkbox2">
+                            <input
+                              onChange={() => toggleImageSelection(product?.id)}
+                              checked={selectedItems.includes(product?.id)}
+                              type="checkbox"
+                              name=""
+                              id=""
+                            />
+                          </div>
+                        ) : (
+                          <div className="checkbox">
+                            <input
+                              onChange={() => toggleImageSelection(product?.id)}
+                              checked={selectedItems.includes(product?.id)}
+                              type="checkbox"
+                              name=""
+                              id=""
+                            />
+                          </div>
+                        )}
+                      </>
+                    </div>
+                  ))}
 
                 <div
                   onClick={onOpenModal}
