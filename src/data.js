@@ -2,12 +2,12 @@ export const data = [
   {
     id: 1,
 
-    src: "https://i.ibb.co/rbDh1vX/image-1.webp",
+    src: "https://i.ibb.co/JC1JDQR/image-11.jpg",
   },
   {
     id: 2,
 
-    src: "https://i.ibb.co/JC1JDQR/image-11.jpg",
+    src: "https://i.ibb.co/rbDh1vX/image-1.webp",
   },
   {
     id: 3,
@@ -32,7 +32,7 @@ export const data = [
   {
     id: 7,
 
-    src: "https://i.ibb.co/0CWC8wx/image-6.webp",
+    src: "https://media.tenor.com/CHFzZkqz0aUAAAAC/anti-theft-backpack-australia-anti-theft-crossbody-bag.gif",
   },
   {
     id: 8,
@@ -54,5 +54,7 @@ export const data = [
 
     src: "https://i.ibb.co/Gs4G5K2/image-10.jpg",
   },
+  
+ 
   // Add more images here
 ];
