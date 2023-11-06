@@ -52,7 +52,7 @@ const Product = () => {
   }
 
   // add new image function
-  var expression = /^data:image\/(jpeg|jpg|gif|png|bmp|webp|svg\+xml|tiff|ico);base64,/;
+  var expression = /\.(jpeg|jpg|gif|png|bmp|webp|svg|tiff|ico)$/i;
   var regex = new RegExp(expression);
   const addNewImage = () => {
     if (newImageSrc) {
@@ -68,7 +68,7 @@ const Product = () => {
         setNewImageSrc(""); // Clear the new image source after adding it
         onCloseModal();
       } else {
-        toast.warning("invalid url");
+        toast.warning(`Invalid Url. plz add .(jpeg|jpg|gif|png|bmp|webp|svg|tiff|ico)`);
       }
     } else {
       toast.warning("Past your image url");
