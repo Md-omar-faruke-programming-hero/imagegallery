@@ -21,7 +21,7 @@ const SortableProduct = ({ product }) => {
       {...listeners}
       className={` rounded-[5px] md:rounded-[8px] overflow-hidden border-[2px] border-solid border-[#f1f3f4] hover:overlay-bg cursor-move `}
     >
-      <img className="" src={product?.src} alt="product image" />
+      <img className="w-full h-full" src={product?.src} alt="product image" />
     </div>
   );
 };
