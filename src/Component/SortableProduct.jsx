@@ -19,7 +19,7 @@ const SortableProduct = ({ product }) => {
       style={style}
       {...attributes}
       {...listeners}
-      className={` rounded-[5px] md:rounded-[8px] overflow-hidden border-[2px] border-solid border-[#f1f3f4] hover:overlay-bg cursor-move `}
+      className={` rounded-[5px] md:rounded-[8px] overflow-hidden border-[2px] border-solid border-[#f1f3f4]  cursor-move `}
     >
       <img className="w-full h-full" src={product?.src} alt="product image" />
     </div>

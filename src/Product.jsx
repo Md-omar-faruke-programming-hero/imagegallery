@@ -100,7 +100,7 @@ const Product = () => {
         ) : (
           <div className="px-[10px] md:px-[20px]  py-[10px] md:py-[20px] border-b-[2px] md:border-b-[3px]border-solid border-[#f1f3f4]">
             <div className="cursor-pointer">
-              <h1 className="font-semibold"> Gallery </h1>
+              <h1 className="font-semibold">Draggable Gallery </h1>
             </div>
           </div>
         )}
@@ -114,7 +114,7 @@ const Product = () => {
                   products?.map((product, i) => (
                     <div
                       key={i}
-                      className={`imgContainer  ${i === 0 ? "md:col-span-2 md:row-span-2" : ""}`}
+                      className={`imgContainer hover:overlay-bg ${i === 0 ? "md:col-span-2 md:row-span-2" : ""}`}
                     >
                       {console.log(i, "index")}
                       <SortableProduct product={product} />
